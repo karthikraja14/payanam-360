@@ -1,1 +1,1 @@
-{"name":"vystra-go","version":"0.1.0","private":true,"type":"module","scripts":{"dev":"node server/index.js","start":"node server/index.js","test":"node --test","check":"node --check server/index.js && node --check app/app.js && node --test"},"engines":{"node":">=20"}}
+{"name":"payanam-360","version":"0.1.0","private":true,"type":"module","scripts":{"dev":"node server/index.js","start":"node server/index.js","test":"node --test","check":"node --check server/index.js && node --check app/app.js && node --test"},"engines":{"node":">=20"}}

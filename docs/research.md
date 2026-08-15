@@ -28,7 +28,7 @@ The government open-data catalog contains outlet datasets, but one located natio
 
 ## Competitor gap
 
-Network apps optimize their own charging/payment ecosystem. Aggregator/community products improve coverage but may mix evidence quality. Vystra Go wins only if it is operator-neutral, transparent about provenance, honest about unknowns, strong on backups, and locally excellent on each launch corridor's amenities and accessibility.
+Network apps optimize their own charging/payment ecosystem. Aggregator/community products improve coverage but may mix evidence quality. Payanam 360 wins only if it is operator-neutral, transparent about provenance, honest about unknowns, strong on backups, and locally excellent on each launch corridor's amenities and accessibility.
 
 ## Primary references
 

@@ -1,4 +1,6 @@
-# Vystra Go
+# Payanam 360
+
+**Every road. One app.** · by Vystra
 
 An India-ready, multi-energy journey intelligence product by Vystra, launching EV-first in Tamil Nadu. It recommends a primary and backup charging stop, and explains *why* each stop is trusted: source, freshness, evidence type, recent reports, compatibility, amenities and historical reliability. Petrol, diesel and CNG follow through the same journey experience once legitimate data sources are connected.
 
