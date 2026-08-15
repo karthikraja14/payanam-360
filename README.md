@@ -10,7 +10,7 @@ An India-ready, multi-energy journey intelligence product by Vystra, launching E
 
 - Chennai-origin demo journeys to Coimbatore, Madurai and Bengaluru
 - EV, petrol, diesel and CNG journey modes
-- Evidence-backed COCO, CODO, DODO and CLDO outlet differentiation
+- All-retailer fuel model separating retailer, COCO/CODO/DODO/CLDO ownership and branded formats such as Ghar
 - Vehicle range, battery and reserve-aware stop scoring
 - Primary and backup stop recommendations
 - Separate operator status, observed freshness and computed confidence

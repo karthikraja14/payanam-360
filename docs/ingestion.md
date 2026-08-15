@@ -12,7 +12,7 @@ Before connecting a source record: owner, access method, explicit authorization/
 4. First-party user reports with consent and moderation.
 5. Manually verified partner submissions.
 
-For fuel outlets, the adapter must map brand, land/asset ownership and operator separately. COCO/CODO/DODO/CLDO is accepted only from an OMC publication/API or a verified outlet claim backed by reviewable evidence. Otherwise the canonical value remains `UNKNOWN`.
+For fuel outlets, the adapter must map retailer, land/asset ownership, operator and branded programme/format separately. The retailer registry is open-ended across public OMCs, private retailers and joint ventures. COCO/CODO/DODO/CLDO and programmes such as Ghar or Pure for Sure are accepted only from a retailer publication/API or a verified outlet claim backed by reviewable evidence. Otherwise ownership remains `UNKNOWN` and programme membership remains empty.
 
 ## Pipeline
 
