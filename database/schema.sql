@@ -1,0 +1,17 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE TYPE evidence_kind AS ENUM ('operator','official','session','community','static');
+CREATE TYPE evse_status AS ENUM ('available','charging','reserved','faulted','offline','unknown');
+CREATE TABLE operators (id uuid PRIMARY KEY, name text NOT NULL, website text, created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE sources (id uuid PRIMARY KEY, operator_id uuid REFERENCES operators, name text NOT NULL, kind evidence_kind NOT NULL, license text, terms_url text, authorized_at timestamptz, refresh_seconds integer, UNIQUE(name));
+CREATE TABLE stations (id uuid PRIMARY KEY, operator_id uuid REFERENCES operators, external_id text, name text NOT NULL, address text, location geography(Point,4326) NOT NULL, opening_hours jsonb, provenance jsonb NOT NULL, first_seen_at timestamptz NOT NULL, last_seen_at timestamptz NOT NULL, UNIQUE(operator_id,external_id));
+CREATE INDEX stations_location_idx ON stations USING gist(location);
+CREATE TABLE evses (id uuid PRIMARY KEY, station_id uuid NOT NULL REFERENCES stations ON DELETE CASCADE, external_id text, status evse_status NOT NULL DEFAULT 'unknown', status_observed_at timestamptz, status_received_at timestamptz, UNIQUE(station_id,external_id));
+CREATE TABLE connectors (id uuid PRIMARY KEY, evse_id uuid NOT NULL REFERENCES evses ON DELETE CASCADE, standard text NOT NULL, format text, power_kw numeric(7,2), voltage integer, amperage integer);
+CREATE TABLE status_observations (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, evse_id uuid NOT NULL REFERENCES evses, source_id uuid NOT NULL REFERENCES sources, status evse_status NOT NULL, observed_at timestamptz NOT NULL, received_at timestamptz NOT NULL DEFAULT now(), raw_ref text, CHECK(observed_at <= received_at + interval '5 minutes'));
+CREATE INDEX status_recent_idx ON status_observations(evse_id,observed_at DESC);
+CREATE TABLE amenities (id uuid PRIMARY KEY, station_id uuid NOT NULL REFERENCES stations ON DELETE CASCADE, category text NOT NULL, name text, distance_m integer, source_id uuid REFERENCES sources, observed_at timestamptz);
+CREATE TABLE users (id uuid PRIMARY KEY, created_at timestamptz NOT NULL DEFAULT now(), trust_score numeric(4,3) NOT NULL DEFAULT .5, CHECK(trust_score BETWEEN 0 AND 1));
+CREATE TABLE reports (id uuid PRIMARY KEY, station_id uuid NOT NULL REFERENCES stations, evse_id uuid REFERENCES evses, user_id uuid NOT NULL REFERENCES users, outcome text NOT NULL CHECK(outcome IN ('working','slow','failed','inaccessible')), observed_at timestamptz NOT NULL, created_at timestamptz NOT NULL DEFAULT now(), location_verified boolean NOT NULL DEFAULT false, moderation_state text NOT NULL DEFAULT 'pending');
+CREATE TABLE charging_sessions (id uuid PRIMARY KEY, evse_id uuid NOT NULL REFERENCES evses, source_id uuid NOT NULL REFERENCES sources, external_id text, started_at timestamptz NOT NULL, ended_at timestamptz, success boolean, energy_kwh numeric(10,3), UNIQUE(source_id,external_id));
+CREATE TABLE confidence_snapshots (evse_id uuid NOT NULL REFERENCES evses, computed_at timestamptz NOT NULL, score numeric(5,2) NOT NULL CHECK(score BETWEEN 0 AND 100), factors jsonb NOT NULL, PRIMARY KEY(evse_id,computed_at));
+CREATE TABLE ingestion_runs (id uuid PRIMARY KEY, source_id uuid NOT NULL REFERENCES sources, started_at timestamptz NOT NULL, finished_at timestamptz, records_seen integer DEFAULT 0, records_changed integer DEFAULT 0, status text NOT NULL, error_summary text);

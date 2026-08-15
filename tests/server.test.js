@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createServer} from 'node:http';import {handler} from '../server/index.js';
+test('health endpoint responds',async()=>{const server=createServer(handler);await new Promise(r=>server.listen(0,r));const {port}=server.address();const res=await fetch(`http://127.0.0.1:${port}/health`);assert.equal(res.status,200);assert.equal((await res.json()).status,'ok');await new Promise(r=>server.close(r))});

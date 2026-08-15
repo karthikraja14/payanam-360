@@ -1,0 +1,11 @@
+export const journeys={
+ Coimbatore:{distance:505,duration:'8 hr 20 min',stops:[
+  {id:'salem-green',name:'Salem Green Hub',town:'Salem',distance:315,detour:2.1,power:120,connector:'CCS2',status:'Available',evidence:'operator',source:'Illustrative CPO feed',ageMinutes:3,reliability:94,successfulReports:6,conflict:false,amenities:['Restroom','Restaurant','Coffee','Parking']},
+  {id:'avina-stop',name:'Avinashi Highway Stop',town:'Avinashi',distance:445,detour:1.4,power:60,connector:'CCS2',status:'Unknown',evidence:'community',source:'Demo community report',ageMinutes:42,reliability:88,successfulReports:5,conflict:false,amenities:['Restroom','Food','Parking']},
+  {id:'krish-alt',name:'Krishnagiri Charge Court',town:'Krishnagiri',distance:265,detour:4.8,power:60,connector:'CCS2',status:'Available',evidence:'official',source:'Illustrative official registry',ageMinutes:91,reliability:86,successfulReports:2,conflict:true,amenities:['Restroom','Tea','Parking']}]},
+ Madurai:{distance:462,duration:'7 hr 35 min',stops:[
+  {id:'trichy-plaza',name:'Trichy Journey Plaza',town:'Tiruchirappalli',distance:330,detour:1.2,power:120,connector:'CCS2',status:'Available',evidence:'session',source:'Illustrative successful session',ageMinutes:8,reliability:96,successfulReports:8,conflict:false,amenities:['Restroom','Restaurant','Coffee','Parking']},
+  {id:'villupuram',name:'Villupuram Rest & Charge',town:'Villupuram',distance:170,detour:2.9,power:60,connector:'CCS2',status:'Available',evidence:'community',source:'Demo community report',ageMinutes:24,reliability:89,successfulReports:5,conflict:false,amenities:['Restroom','Food','Parking']}]},
+ Bengaluru:{distance:350,duration:'6 hr 10 min',stops:[
+  {id:'krish-fast',name:'Krishnagiri Fast Stop',town:'Krishnagiri',distance:265,detour:1.1,power:180,connector:'CCS2',status:'Available',evidence:'operator',source:'Illustrative CPO feed',ageMinutes:2,reliability:97,successfulReports:7,conflict:false,amenities:['Restroom','Restaurant','Coffee','Parking','ATM']},
+  {id:'vellore-backup',name:'Vellore Reliable Backup',town:'Vellore',distance:140,detour:3.2,power:60,connector:'CCS2',status:'Unknown',evidence:'static',source:'Illustrative registry record',ageMinutes:2880,reliability:82,successfulReports:1,conflict:false,amenities:['Restroom','Food']}]}}
