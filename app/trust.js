@@ -11,3 +11,6 @@ export function rank(stations, rangeKm, battery, reserve) {
   const safeDistance = rangeKm * Math.max(0, battery-reserve) / 100;
   return stations.map(s => ({...s, confidence:confidence(s), reachable:s.distance <= safeDistance, score:confidence(s)*.65 + s.amenities.length*4 + Math.min(s.power,180)/18 - Math.max(0,s.detour-2)*2})).sort((a,b) => b.reachable-a.reachable || b.score-a.score);
 }
+export function rankFuel(stations, product, preferredModel='all') {
+  return stations.filter(s=>s.products.includes(product)).map(s=>({...s,confidence:confidence(s),reachable:true,score:confidence(s)*.7+s.amenities.length*4+(preferredModel===s.model?12:0)+(s.verifiedModel?8:0)})).sort((a,b)=>b.score-a.score);
+}

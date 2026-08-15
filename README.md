@@ -9,10 +9,12 @@ An India-ready, multi-energy journey intelligence product by Vystra, launching E
 ## What works
 
 - Chennai-origin demo journeys to Coimbatore, Madurai and Bengaluru
+- EV, petrol, diesel and CNG journey modes
+- Evidence-backed COCO, CODO, DODO and CLDO outlet differentiation
 - Vehicle range, battery and reserve-aware stop scoring
 - Primary and backup stop recommendations
 - Separate operator status, observed freshness and computed confidence
-- Station details, nearby amenities and community verification flow
+- Station details, nearby amenities and persistent community-report API
 - Installable/offline-friendly PWA shell
 - Dependency-free Node server, tests and GitHub Actions
 - PostgreSQL/PostGIS production schema and OCPI-oriented ingestion design
@@ -54,7 +56,7 @@ Start with this PWA, static hosting, a free Postgres tier and a scheduled ingest
 
 ## Current limits
 
-The route geometry and stations are demo fixtures. There is no account system, server-side persistence, navigation API, live telemetry, payment or CPO control. User verifications persist only in the current browser. These are deliberate MVP boundaries, not production claims.
+The route geometry and stations are demo fixtures. Reports persist as JSONL for a controlled single-instance pilot; deploy PostgreSQL before horizontal scaling. There is no account system, navigation provider, live telemetry, payment or CPO control. These are deliberate data/partnership boundaries, not production claims.
 
 ## License
 

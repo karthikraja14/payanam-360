@@ -12,6 +12,8 @@ Before connecting a source record: owner, access method, explicit authorization/
 4. First-party user reports with consent and moderation.
 5. Manually verified partner submissions.
 
+For fuel outlets, the adapter must map brand, land/asset ownership and operator separately. COCO/CODO/DODO/CLDO is accepted only from an OMC publication/API or a verified outlet claim backed by reviewable evidence. Otherwise the canonical value remains `UNKNOWN`.
+
 ## Pipeline
 
 Fetch with conditional requests; archive a payload hash and run metadata; validate source schema; map into canonical types; spatial/name deduplicate without deleting source identities; append observations; refresh current projections; compute confidence; publish coverage and lag metrics. Failed records go to quarantine and never silently become “unknown.”

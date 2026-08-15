@@ -36,3 +36,5 @@ The north-star is successfully completed intercity journeys, not station pins or
 ## Fuel extension
 
 The shared model becomes an energy location with EVSEs or fuel products. Phase two adds petrol/diesel station discovery, official retail price where lawfully available, hours and amenities. Stock is shown only as “reported available” with source and age; no live-stock claim exists without a station/OMC feed. CNG and hybrid routing follow later.
+
+Fuel outlets distinguish operating models only with evidence: COCO (company owned/company operated), CODO (company owned/dealer operated), DODO (dealer owned/dealer operated) and CLDO (company leased/dealer operated). Brand and ownership model are separate fields. Unknown is the default; Payanam 360 never infers a model from an OMC logo.

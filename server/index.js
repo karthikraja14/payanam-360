@@ -1,22 +1,9 @@
-import { createServer } from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
-import { extname, join, normalize } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const root = join(fileURLToPath(new URL('..', import.meta.url)), 'app');
-const port = Number(process.env.PORT || 4173);
-const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webmanifest':'application/manifest+json'};
-
-export function handler(req, res) {
-  const url = new URL(req.url, 'http://local');
-  if (url.pathname === '/health') return json(res, 200, {status:'ok', service:'payanam-360'});
-  const requested = url.pathname === '/' ? 'index.html' : decodeURIComponent(url.pathname.slice(1));
-  const file = normalize(join(root, requested));
-  if (!file.startsWith(root)) return json(res, 403, {error:'forbidden'});
-  stat(file).then(s => s.isFile() ? readFile(file) : Promise.reject()).then(body => {
-    res.writeHead(200, {'content-type':types[extname(file)] || 'application/octet-stream','cache-control': requested === 'index.html' ? 'no-cache' : 'public, max-age=3600','x-content-type-options':'nosniff'});
-    res.end(body);
-  }).catch(() => json(res, 404, {error:'not found'}));
-}
-function json(res, status, body) { res.writeHead(status, {'content-type':'application/json; charset=utf-8'}); res.end(JSON.stringify(body)); }
-if (process.argv[1] === fileURLToPath(import.meta.url)) createServer(handler).listen(port, () => console.log(`Payanam 360: http://localhost:${port}`));
+import {createServer} from 'node:http';import {readFile,stat} from 'node:fs/promises';import {extname,join,normalize} from 'node:path';import {fileURLToPath} from 'node:url';import {coverage,outletModels,validateReport} from './api.js';import {ReportStore} from './store.js';
+const root=join(fileURLToPath(new URL('..',import.meta.url)),'app'),port=Number(process.env.PORT||4173),store=new ReportStore();
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webmanifest':'application/manifest+json'};
+const security={'x-content-type-options':'nosniff','referrer-policy':'strict-origin-when-cross-origin','permissions-policy':'geolocation=(self)','content-security-policy':"default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"};
+export async function handler(req,res){try{const url=new URL(req.url,'http://local');if(url.pathname==='/health')return json(res,200,{status:'ok',service:'payanam-360'});if(url.pathname==='/api/v1/coverage'&&req.method==='GET')return json(res,200,coverage);if(url.pathname==='/api/v1/outlet-models'&&req.method==='GET')return json(res,200,{models:outletModels});if(url.pathname==='/api/v1/reports'&&req.method==='POST'){const body=await readBody(req,8192),result=validateReport(body);if(!result.ok)return json(res,422,{error:result.error});return json(res,202,{report:await store.add(result.value)});}if(url.pathname.startsWith('/api/'))return json(res,404,{error:'not found'});return serve(url.pathname,res)}catch(error){return json(res,error.code==='BODY_TOO_LARGE'?413:500,{error:error.code==='BODY_TOO_LARGE'?'payload too large':'internal error'})}}
+async function serve(pathname,res){const requested=pathname==='/'?'index.html':decodeURIComponent(pathname.slice(1)),file=normalize(join(root,requested));if(!file.startsWith(root))return json(res,403,{error:'forbidden'});try{if(!(await stat(file)).isFile())throw 0;const body=await readFile(file);res.writeHead(200,{...security,'content-type':types[extname(file)]||'application/octet-stream','cache-control':requested==='index.html'?'no-cache':'public, max-age=3600'});res.end(body)}catch{return json(res,404,{error:'not found'})}}
+async function readBody(req,limit){let size=0,raw='';for await(const chunk of req){size+=chunk.length;if(size>limit){const e=new Error();e.code='BODY_TOO_LARGE';throw e}raw+=chunk}try{return JSON.parse(raw)}catch{return null}}
+function json(res,status,body){res.writeHead(status,{...security,'content-type':'application/json; charset=utf-8','cache-control':'no-store'});res.end(JSON.stringify(body))}
+if(process.argv[1]===fileURLToPath(import.meta.url))createServer(handler).listen(port,()=>console.log(`Payanam 360: http://localhost:${port}`));

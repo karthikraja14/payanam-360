@@ -26,6 +26,8 @@ OCPI supports locations, real-time charge-point status, tariffs and sessions. It
 
 The government open-data catalog contains outlet datasets, but one located national catalog was last updated in 2014 and is unsuitable as current station truth. Public price information is not the same as station inventory. Launch fuel discovery later using current licensed/official outlet and price data; show availability only as partner telemetry or time-stamped community reporting.
 
+HPCL's official materials distinguish DODO, CODO and COCO by ownership and operation, and its retail material also recognizes CLDO/variants. HPCL says its automated outlet systems carry inventory information to its central system, but that does not make inventory a public API. Payanam 360 therefore models these classifications while requiring an explicit OMC agreement before claiming live fuel stock.
+
 ## Competitor gap
 
 Network apps optimize their own charging/payment ecosystem. Aggregator/community products improve coverage but may mix evidence quality. Payanam 360 wins only if it is operator-neutral, transparent about provenance, honest about unknowns, strong on backups, and locally excellent on each launch corridor's amenities and accessibility.
@@ -40,5 +42,7 @@ Network apps optimize their own charging/payment ecosystem. Aggregator/community
 - [Statiq official product overview](https://www.statiq.in/)
 - [OpenStreetMap copyright and licensing](https://www.openstreetmap.org/copyright)
 - [Government open-data retail outlet catalog](https://www.data.gov.in/catalog/state-wise-and-company-wise-retail-outlets)
+- [PPAC statewise retail-outlet resources](https://ppac.gov.in/index.php/infrastructure/retail-outlets)
+- [HPCL official outlet-model description](https://www.hindustanpetroleum.com/documents/pdf/HPCL_RFQ_Asset_Monetisation_Securitization_of_SSLF.pdf)
 
 This is product research, not legal advice. Re-check terms and obtain written permission before production ingestion.

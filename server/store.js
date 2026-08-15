@@ -1,0 +1,2 @@
+import {appendFile,mkdir} from 'node:fs/promises';import {join} from 'node:path';import {randomUUID} from 'node:crypto';
+export class ReportStore{constructor(dir=process.env.DATA_DIR||'.data'){this.dir=dir}async add(report){await mkdir(this.dir,{recursive:true});const record={id:randomUUID(),...report,createdAt:new Date().toISOString(),moderationState:'pending'};await appendFile(join(this.dir,'reports.jsonl'),JSON.stringify(record)+'\n',{encoding:'utf8'});return record}}
