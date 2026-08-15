@@ -9,7 +9,7 @@ const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charse
 
 export function handler(req, res) {
   const url = new URL(req.url, 'http://local');
-  if (url.pathname === '/health') return json(res, 200, {status:'ok', service:'nambikkai-journey'});
+  if (url.pathname === '/health') return json(res, 200, {status:'ok', service:'vystra-go'});
   const requested = url.pathname === '/' ? 'index.html' : decodeURIComponent(url.pathname.slice(1));
   const file = normalize(join(root, requested));
   if (!file.startsWith(root)) return json(res, 403, {error:'forbidden'});
@@ -19,4 +19,4 @@ export function handler(req, res) {
   }).catch(() => json(res, 404, {error:'not found'}));
 }
 function json(res, status, body) { res.writeHead(status, {'content-type':'application/json; charset=utf-8'}); res.end(JSON.stringify(body)); }
-if (process.argv[1] === fileURLToPath(import.meta.url)) createServer(handler).listen(port, () => console.log(`Nambikkai Journey: http://localhost:${port}`));
+if (process.argv[1] === fileURLToPath(import.meta.url)) createServer(handler).listen(port, () => console.log(`Vystra Go: http://localhost:${port}`));

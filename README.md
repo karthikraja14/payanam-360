@@ -1,6 +1,6 @@
-# Nambikkai Journey
+# Vystra Go
 
-An EV-first journey intelligence MVP for Tamil Nadu. It recommends a primary and backup charging stop, and explains *why* each stop is trusted: source, freshness, evidence type, recent reports, compatibility, amenities and historical reliability.
+An India-ready, multi-energy journey intelligence product by Vystra, launching EV-first in Tamil Nadu. It recommends a primary and backup charging stop, and explains *why* each stop is trusted: source, freshness, evidence type, recent reports, compatibility, amenities and historical reliability. Petrol, diesel and CNG follow through the same journey experience once legitimate data sources are connected.
 
 > This repository ships with illustrative demo records, not a live station directory. The UI labels them accordingly. Production ingestion requires a licensed/open source or a written operator partnership.
 

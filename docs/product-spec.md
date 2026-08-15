@@ -2,7 +2,7 @@
 
 ## Promise
 
-“Tell me the best place to stop—and how certain you are.” Nambikkai is one journey interface across operators, beginning with EV travel in Tamil Nadu. It does not pretend to be the charger network or promise universal payment.
+“Tell me the best place to stop—and how certain you are.” Vystra Go is one journey interface across operators and energy types, beginning with EV travel in Tamil Nadu and designed to scale across India. It does not pretend to be the charger network or promise universal payment.
 
 ## Primary user and job
 
